@@ -3,7 +3,7 @@ object Form3: TForm3
   Top = 0
   Align = alCustom
   BorderStyle = bsSingle
-  Caption = 'QB File Tool 0.4 by darkdks'
+  Caption = 'QB File Tool 0.6 by darkdks'
   ClientHeight = 860
   ClientWidth = 1075
   Color = clWhite
@@ -37,7 +37,7 @@ object Form3: TForm3
     Top = 0
     Width = 1075
     Height = 824
-    ActivePage = ts3
+    ActivePage = tsScriptConvert
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -60,16 +60,16 @@ object Form3: TForm3
         object lbl2: TLabel
           Left = 3
           Top = 49
-          Width = 135
+          Width = 203
           Height = 13
-          Caption = 'Destination of the file tables'
+          Caption = 'Destination of the file tables (alltables.txt)'
         end
         object lbl1: TLabel
           Left = 3
           Top = 3
-          Width = 119
+          Width = 164
           Height = 13
-          Caption = 'Source folder with tables'
+          Caption = 'Source folder with tables (qb files)'
         end
         object edtTargetTabs: TJvFilenameEdit
           Left = 3
@@ -78,7 +78,7 @@ object Form3: TForm3
           Height = 21
           DialogKind = dkSave
           TabOrder = 0
-          Text = 'C:\Users\Samuel Rodrigues\Desktop\THUG21\alltables.txt'
+          Text = ''
         end
         object edtSourceQBS: TJvDirectoryEdit
           Left = 3
@@ -86,9 +86,8 @@ object Form3: TForm3
           Width = 441
           Height = 21
           OnAfterDialog = edtSourceQBSAfterDialog
-          DialogKind = dkWin32
           TabOrder = 1
-          Text = 'C:\Users\Samuel Rodrigues\Desktop\scripts'
+          Text = ''
         end
         object pro: TButton
           AlignWithMargins = True
@@ -116,7 +115,7 @@ object Form3: TForm3
         TabOrder = 1
       end
     end
-    object ts2: TTabSheet
+    object tsScriptConvert: TTabSheet
       Caption = 'Script Convert'
       ImageIndex = 1
       object pnl1: TPanel
@@ -138,9 +137,9 @@ object Form3: TForm3
         object lbl3: TLabel
           Left = 3
           Top = 3
-          Width = 43
+          Width = 111
           Height = 13
-          Caption = 'Table file'
+          Caption = 'Table file (alltables.txt)'
         end
         object lblTablesCount: TLabel
           Left = 486
@@ -162,6 +161,7 @@ object Form3: TForm3
           Height = 21
           Filter = 'decompiled qb script (*.txt)|*.txt'
           TabOrder = 0
+          Text = ''
           OnChange = edt3Change
         end
         object edt2: TJvFilenameEdit
@@ -172,6 +172,7 @@ object Form3: TForm3
           Align = alCustom
           Filter = 'All tabs file (.txt)|*.txt'
           TabOrder = 1
+          Text = ''
           OnChange = edt2Change
         end
         object btn_convertScript: TButton
@@ -210,48 +211,150 @@ object Form3: TForm3
           TabOrder = 4
         end
       end
-      object pgc2: TPageControl
+      object pgc_scriptConvert: TPageControl
         Left = 0
-        Top = 113
+        Top = 119
         Width = 1067
-        Height = 683
-        ActivePage = ts5
-        Align = alClient
+        Height = 677
+        ActivePage = tsScriptConverted
+        Align = alCustom
         TabOrder = 1
-        object ts4: TTabSheet
+        object tsScriptOriginal: TTabSheet
           Caption = 'Original'
-          object mmoScriptOriginal: TMemo
+          ExplicitHeight = 655
+          object pcScriptOriginal: TPageControl
             Left = 0
             Top = 0
             Width = 1059
-            Height = 655
+            Height = 649
+            ActivePage = ts_orig_table
             Align = alClient
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-            ScrollBars = ssBoth
             TabOrder = 0
+            ExplicitHeight = 655
+            object ts_orig_script: TTabSheet
+              Caption = 'Script'
+              ExplicitHeight = 627
+              object mmoScriptOriginal: TMemo
+                Left = 0
+                Top = 0
+                Width = 1051
+                Height = 621
+                Align = alClient
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                ScrollBars = ssBoth
+                TabOrder = 0
+                ExplicitHeight = 627
+              end
+            end
+            object ts_orig_table: TTabSheet
+              Caption = 'table_qbi'
+              ImageIndex = 1
+              ExplicitHeight = 627
+              object mmoOrigTableFile: TMemo
+                Left = 0
+                Top = 0
+                Width = 1051
+                Height = 621
+                Align = alClient
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                ScrollBars = ssBoth
+                TabOrder = 0
+                ExplicitHeight = 627
+              end
+            end
           end
         end
-        object ts5: TTabSheet
+        object tsScriptConverted: TTabSheet
           Caption = 'Converted'
           ImageIndex = 1
-          object rcScriptConverted: TJvRichEdit
+          object pcScriptConverted: TPageControl
             Left = 0
             Top = 0
             Width = 1059
-            Height = 655
+            Height = 649
+            ActivePage = ts_conv_script
             Align = alClient
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
             TabOrder = 0
+            ExplicitHeight = 655
+            object ts_conv_script: TTabSheet
+              Caption = 'Script'
+              ExplicitHeight = 627
+              object pnl4: TPanel
+                Left = 0
+                Top = 586
+                Width = 1051
+                Height = 35
+                Align = alBottom
+                TabOrder = 0
+                ExplicitTop = 592
+                object btnSaveScript: TButton
+                  Left = 968
+                  Top = 6
+                  Width = 75
+                  Height = 25
+                  Caption = 'Save'
+                  TabOrder = 0
+                  OnClick = btnSaveScriptClick
+                end
+              end
+              object rcScriptConverted: TMemo
+                Left = 0
+                Top = 0
+                Width = 1051
+                Height = 586
+                Align = alClient
+                TabOrder = 1
+                ExplicitLeft = 384
+                ExplicitTop = 320
+                ExplicitWidth = 185
+                ExplicitHeight = 89
+              end
+            end
+            object ts_conv_table: TTabSheet
+              Caption = 'table_qbi'
+              ImageIndex = 1
+              ExplicitHeight = 627
+              object Panel2: TPanel
+                Left = 0
+                Top = 586
+                Width = 1051
+                Height = 35
+                Align = alBottom
+                TabOrder = 0
+                ExplicitTop = 592
+                object btnSaveTables: TButton
+                  Left = 968
+                  Top = 6
+                  Width = 75
+                  Height = 25
+                  Caption = 'Save'
+                  TabOrder = 0
+                  OnClick = btnSaveScriptClick
+                end
+              end
+              object rcTableConverted: TMemo
+                Left = 0
+                Top = 0
+                Width = 1051
+                Height = 586
+                Align = alClient
+                TabOrder = 1
+                ExplicitLeft = 384
+                ExplicitTop = 376
+                ExplicitWidth = 185
+                ExplicitHeight = 89
+              end
+            end
           end
         end
       end
@@ -295,7 +398,6 @@ object Form3: TForm3
           Width = 441
           Height = 21
           OnAfterDialog = edt4AfterDialog
-          DialogKind = dkWin32
           TabOrder = 0
           Text = 'C:\Users\Samuel Rodrigues\Desktop\scripts'
         end
@@ -380,7 +482,6 @@ object Form3: TForm3
           Top = 22
           Width = 441
           Height = 21
-          DialogKind = dkWin32
           TabOrder = 0
           Text = 'C:\Users\Samuel Rodrigues\Desktop\scripts'
         end
@@ -461,6 +562,7 @@ object Form3: TForm3
             Font.Style = []
             ParentFont = False
             PopupMenu = pm2
+            SelText = ''
             TabOrder = 0
           end
         end
@@ -496,8 +598,8 @@ object Form3: TForm3
         WordWrap = True
       end
       object chk_customEditor: TCheckBox
-        Left = 378
-        Top = 63
+        Left = 327
+        Top = 38
         Width = 126
         Height = 17
         Caption = 'Enable Custom editor'
@@ -524,22 +626,6 @@ object Form3: TForm3
         Height = 21
         TabOrder = 2
         Text = '%FILEPATH% -n%LINE% -c%COLUMN%'
-      end
-      object mmo1: TMemo
-        Left = 112
-        Top = 296
-        Width = 497
-        Height = 273
-        TabOrder = 3
-      end
-      object btn2: TButton
-        Left = 112
-        Top = 265
-        Width = 75
-        Height = 25
-        Caption = 'btn2'
-        TabOrder = 4
-        OnClick = btn2Click
       end
     end
   end
@@ -570,5 +656,9 @@ object Form3: TForm3
   object FindDialog1: TFindDialog
     Left = 832
     Top = 72
+  end
+  object dlgSave1: TSaveDialog
+    Left = 940
+    Top = 647
   end
 end
